@@ -35,20 +35,20 @@
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar ">
         <h4 class="text-white">Admin Panel</h4>
-        <a href="#">Dashboard</a>
-        <a href="#">Users</a>
-        <a href="#">Settings</a>
-        <a href="#">Reports</a>
-        <a href="#">Logout</a>
+        <a href="{{route('admin.users.home')}}">Dashboard</a>
+        <a href="{{route('admin.users.index')}}">Users</a>
+       
+        <a href="{{route('login')}}">Logout</a>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-       @include('admin.header')
+       
 
        @yield('content')
+    </div>
     <!-- Bootstrap 5.2 JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
