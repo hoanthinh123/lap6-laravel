@@ -12,11 +12,10 @@ class UserController extends Controller
 {
     //
     public function index(User $user){
-        $user = User::query()->find("id");
+        $user = Auth::user();
         return view("client.index",compact("user"));
     }
     public function edit(User $user){
-        $user = User::query()->find("id");
 
         return view('client.edit',compact('user'));
     }
@@ -60,10 +59,13 @@ class UserController extends Controller
         if (!Hash::check($request->current_password, Auth::user()->password)) {
             return back()->withErrors(['current_password' => 'Mật khẩu hiện tại không chính xác.']);
         }
-
+        /**
+         * @var \App\Models\User $user
+         */
         // Cập nhật mật khẩu mới cho người dùng
         $user = Auth::user();
         $user->password = Hash::make($request->new_password);
+        $user->save();
 
         return redirect()->back()->with('success', 'Mật khẩu đã được đổi thành công.');
     }

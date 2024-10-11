@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -47,7 +48,7 @@ class UserController extends Controller
         $data = $request->validate([
             'fullname' => ['required', 'min:3'],
             'username' => ['required', 'min:3'],
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
             'password' => ['required', 'min:5'],
             'confirm_password' => ['required', 'same:password'],
             'avatar'=> ['mimes:jpeg,png,jpg,gif', 'max:2048'],

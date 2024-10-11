@@ -22,14 +22,14 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-Route::get('/', function () {return view('client.home');})->name('client.home');
+Route::get('/', function () {
+    return view('client.home');
+})->name('client.home');
 Route::get('/users', [ClientUserController::class, 'index'])->name('client.index');
 Route::get('/users/edit/{user}', [ClientUserController::class, 'edit'])->name('client.user.edit');
 Route::put('/users/edit/{user}', [ClientUserController::class, 'update'])->name('client.user.update');
 Route::get('/users/change-password', [ClientUserController::class, 'showChange'])->name('client.showpassword');
 Route::put('/users/change-password', [ClientUserController::class, 'changePassword'])->name('client.changepassword');
-
 
 //Admin
 Route::middleware([Authenticate::class, CheckAuth::class])->group(function () {
