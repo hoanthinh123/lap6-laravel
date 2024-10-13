@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -23,7 +24,7 @@ class UserController extends Controller
         $data = $request->validate([
             'fullname' => ['required', 'min:3'],
             'username' => ['required', 'min:3'],
-            'email' => ['required', 'email', 'unique:users'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
             'avatar'=> ['mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
         $data = $request->except('avatar');
